@@ -4,5 +4,9 @@
     android:initialKeyguardLayout="@layout/glance_default_loading_layout"
     android:targetCellHeight="3"
     android:targetCellWidth="4"
-    >
+    android:minResizeWidth="102dp"
+    android:minResizeHeight="50dp"
+    android:maxResizeHeight="349dp"
+    android:maxResizeWidth="455dp"
+    android:resizeMode="horizontal|vertical">
 </appwidget-provider>

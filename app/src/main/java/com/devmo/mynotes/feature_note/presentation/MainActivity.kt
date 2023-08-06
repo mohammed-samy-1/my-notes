@@ -59,11 +59,11 @@ class MainActivity : ComponentActivity() {
                             AddEditNoteScreen(navController = navController, color)
                         }
                     }
-                    val intent = intent
 
                     callback = Callback{ id, color ->
                         navController.navigate(Screen.AddEditNotesScreen.route + "?noteId=${id}&noteColor=${color}")
                     }
+                    val intent = intent
                     checkIntent(intent = intent)
                 }
             }

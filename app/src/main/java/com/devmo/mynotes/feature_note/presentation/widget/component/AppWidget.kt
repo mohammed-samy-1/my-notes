@@ -2,7 +2,6 @@ package com.devmo.mynotes.feature_note.presentation.widget.component
 
 import android.content.Context
 import android.content.Intent
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
@@ -63,7 +62,6 @@ class AppWidget @Inject constructor() : GlanceAppWidget() {
                 }
             }
         }
-
     }
 
     @Composable
@@ -80,7 +78,9 @@ class AppWidget @Inject constructor() : GlanceAppWidget() {
                     .padding(8.dp)
                     .clickable {
                         val intent = Intent(context, MainActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                            )
                             putExtra("id", note.id)
                             putExtra("color", note.color)
                         }
