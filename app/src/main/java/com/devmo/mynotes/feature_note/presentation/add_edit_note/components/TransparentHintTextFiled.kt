@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 
 @Composable
@@ -25,7 +26,8 @@ fun TransparentHintTexFiled(
     onValueChange: (String) -> Unit,
     textStyle: TextStyle = TextStyle(),
     isSingleLine: Boolean = false,
-    onFocusChange: (FocusState) -> Unit
+    onFocusChange: (FocusState) -> Unit,
+    testTag:String = "",
 ) {
     Box(modifier = modifier) {
         BasicTextField(
@@ -37,7 +39,8 @@ fun TransparentHintTexFiled(
                 .fillMaxWidth()
                 .onFocusChanged {
                     onFocusChange(it)
-                },
+                }
+                .testTag(testTag),
 
         )
         AnimatedVisibility(

@@ -1,8 +1,6 @@
 package com.devmo.mynotes.feature_note.presentation.notes.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,11 +15,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.devmo.mynotes.feature_note.domain.model.Note
+import com.devmo.mynotes.R
+import com.devmo.mynotes.core.util.TestTags
 import com.devmo.mynotes.feature_note.presentation.notes.NotesEvent
 import com.devmo.mynotes.feature_note.presentation.notes.NotesViewModel
 import com.devmo.mynotes.feature_note.presentation.util.Screen
@@ -49,17 +49,25 @@ fun NotesScreen(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(R.string.add_note)
+                )
             }
         },
-        snackbarHost = { SnackbarHost(snakeBarHostState) },
+        snackbarHost = {
+            SnackbarHost(
+                snakeBarHostState,
+                modifier = Modifier.testTag(TestTags.SNAKEBAR)
+            )
+        },
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
-    ) {
+    ) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(8.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -67,13 +75,16 @@ fun NotesScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Your notes",
+                    text = stringResource(R.string.your_notes),
                     style = MaterialTheme.typography.headlineMedium
                 )
                 IconButton(
                     onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }
                 ) {
-                    Icon(imageVector = Icons.Default.Sort, contentDescription = "sort")
+                    Icon(
+                        imageVector = Icons.Default.Sort,
+                        contentDescription = stringResource(id = R.string.sort)
+                    )
                 }
             }
             AnimatedVisibility(
@@ -82,7 +93,8 @@ fun NotesScreen(
                 OrderSection(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp), onOrderChanged = {
+                        .padding(vertical = 16.dp)
+                        .testTag(TestTags.ORDER_SECTION), onOrderChanged = {
                         viewModel.onEvent(NotesEvent.Order(it))
                     },
                     noteOrder = state.noteOrder
@@ -94,11 +106,13 @@ fun NotesScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(state.notes, key = {
-                    it.id?:0 }) { note ->
+                    it.id ?: 0
+                }) { note ->
                     NoteItem(
                         modifier = Modifier
                             .animateItemPlacement()
                             .fillMaxWidth()
+                            .testTag(TestTags.NOTE)
                             .clickable {
                                 navController.navigate(
                                     Screen.AddEditNotesScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
@@ -107,9 +121,10 @@ fun NotesScreen(
                         note = note,
                         onDeleteClicked = {
                             viewModel.onEvent(NotesEvent.Delete(note))
+
                             scope.launch {
                                 val result = snakeBarHostState.showSnackbar(
-                                    message = "note ${note.title} deleted",
+                                    message = "Note ${note.title} deleted",
                                     actionLabel = "Undo",
                                     duration = SnackbarDuration.Short
                                 )

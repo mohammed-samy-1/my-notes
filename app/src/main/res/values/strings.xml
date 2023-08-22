@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">My Notes</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="color">Color</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="add_note">Add note</string>
+    <string name="sort">sort</string>
+    <string name="undo">Undo</string>
+    <string name="note_deleted">note %1$s deleted</string>
+    <string name="your_notes">Your notes</string>
+    <string name="save_note">Save note</string>
+    <string name="delete_note">Delete note</string>
 </resources>

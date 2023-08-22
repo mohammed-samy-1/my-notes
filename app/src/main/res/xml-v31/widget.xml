@@ -8,5 +8,6 @@
     android:minResizeHeight="50dp"
     android:maxResizeHeight="349dp"
     android:maxResizeWidth="455dp"
-    android:resizeMode="horizontal|vertical">
+    android:resizeMode="horizontal|vertical"
+    android:previewLayout="@layout/glance_default_loading_layout">
 </appwidget-provider>
