@@ -9,10 +9,13 @@ This repository contains an Android notes app built using Clean Architecture pri
 - **CRUD Functionality:** Users can Create, Read, Update, and Delete notes within the app.
 - **Sorting:** Notes can be sorted by name, date, or color in ascending or descending order.
 - **Home Screen Widgets:** Home screen widgets are implemented using the Glance API to display users' notes on their home screen.
+- **dynamic color:** The app colors change according to the phone's wallpaper on devices that runs on android 12 or higher.
 
 ## Screenshots
 
-![App Screenshots](screenshots.png)
+| ![notes](https://github.com/mohammed-samy-1/my-notes/blob/master/Screenshot_20230823_232723.png) | ![sorting](https://github.com/mohammed-samy-1/my-notes/blob/master/Screenshot_20230823_232839.png)|
+| --- | --- |
+| ![create or edit note](https://github.com/mohammed-samy-1/my-notes/blob/master/Screenshot_20230823_232859.png) | ![widget](https://github.com/mohammed-samy-1/my-notes/blob/master/Screenshot_20230823_233107.png) |
 
 ## Getting Started
 
