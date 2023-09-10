@@ -83,6 +83,7 @@ class AppWidget @Inject constructor() : GlanceAppWidget() {
                             )
                             putExtra("id", note.id)
                             putExtra("color", note.color)
+                            action = Intent.ACTION_EDIT
                         }
                         context.startActivity(intent)
                     }

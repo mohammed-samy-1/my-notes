@@ -59,12 +59,13 @@ class MainActivity : ComponentActivity() {
                             AddEditNoteScreen(navController = navController, color)
                         }
                     }
-
-                    callback = Callback{ id, color ->
+                    callback = Callback { id, color ->
                         navController.navigate(Screen.AddEditNotesScreen.route + "?noteId=${id}&noteColor=${color}")
                     }
                     val intent = intent
-                    checkIntent(intent = intent)
+                    if (intent.action?.equals(Intent.ACTION_EDIT) == true) {
+                        checkIntent(intent = intent)
+                    }
                 }
             }
         }
@@ -74,7 +75,8 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         checkIntent(intent = intent)
     }
-    private fun checkIntent(intent: Intent?){
+
+    private fun checkIntent(intent: Intent?) {
         if (intent != null) {
             val id = intent.getIntExtra("id", -1)
             val color = intent.getIntExtra("color", -1)
@@ -83,8 +85,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    private fun interface Callback{
-        fun onCallback(id:Int, color:Int)
+
+    private fun interface Callback {
+        fun onCallback(id: Int, color: Int)
     }
 
     override fun onPause() {
